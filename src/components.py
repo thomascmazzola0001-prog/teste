@@ -1,20 +1,26 @@
 from __future__ import annotations
-import base64
 from pathlib import Path
+import base64
 import streamlit as st
 
 
 def image_as_base64(path: str | Path) -> str:
     p = Path(path)
+    if not p.exists():
+        return ""
     return base64.b64encode(p.read_bytes()).decode("utf-8")
 
 
 def sidebar_brand(logo_path: str | Path) -> None:
     encoded = image_as_base64(logo_path)
+    if encoded:
+        brand = f'<img src="data:image/png;base64,{encoded}" style="width:170px;max-width:100%;display:block;margin:0 auto 8px;">'
+    else:
+        brand = '<div style="font-size:2.05rem;font-weight:900;font-style:italic;letter-spacing:-2px;color:#E30613;line-height:1;margin-bottom:10px;">jamef</div>'
     st.markdown(
         f"""
         <div class="jamef-logo-box">
-          <img src="data:image/png;base64,{encoded}" style="width:170px;max-width:100%;display:block;margin:0 auto 8px;">
+          {brand}
           <div class="sidebar-title">S&OP Control Tower</div>
           <div class="sidebar-subtitle">Planejamento integrado de demanda, capacidade e resultado</div>
         </div>
@@ -74,11 +80,7 @@ def stage_cards(active: int = 5) -> None:
     for i, (num, name, owner) in enumerate(stages, start=1):
         active_class = " active" if i == active else ""
         html.append(
-            f"""<div class="stage-card{active_class}">
-              <div class="stage-num">{num}</div>
-              <div class="stage-name">{name}</div>
-              <div class="stage-owner">{owner}</div>
-            </div>"""
+            f'<div class="stage-card{active_class}"><div class="stage-num">{num}</div><div class="stage-name">{name}</div><div class="stage-owner">{owner}</div></div>'
         )
     html.append("</div>")
     st.markdown("".join(html), unsafe_allow_html=True)
