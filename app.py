@@ -1,5 +1,4 @@
-"""Compatibilidade para deployments configurados com app.py."""
+"""Arquivo principal configurado no Streamlit Community Cloud."""
 from streamlit_app import main
 
-if __name__ == "__main__":
-    main()
+main()
