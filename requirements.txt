@@ -1,0 +1,40 @@
+# S&OP Jamef — Streamlit V3
+
+Versão reconstruída integralmente para reproduzir a estrutura visual do mockup aprovado e utilizar a identidade Jamef.
+
+## Diferenciais desta versão
+
+- Projeto completo e autocontido.
+- Todos os módulos necessários estão no ZIP.
+- Logo Jamef incorporado em `assets/jamef_logo.png`.
+- Fundo claro, sidebar escura e vermelho Jamef como cor de ação.
+- Gráficos com fundo branco.
+- Cards compactos.
+- Filtros no topo de todas as telas.
+- Seis módulos funcionais.
+- Motor integrado de demanda, piso, pessoas, veículos e EBITDA.
+- Editores de restrições, piso, produtividade, frota e custos.
+- Exportação das bases em Excel.
+
+## Instalação no Windows
+
+```bat
+cd C:\caminho\SOP_Streamlit_Jamef_V3
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+## Publicação no Streamlit Community Cloud
+
+1. Envie todos os arquivos do projeto para um repositório GitHub.
+2. Confirme que `app.py` está na raiz.
+3. Confirme que `requirements.txt`, `src/`, `assets/` e `.streamlit/` foram enviados.
+4. Na configuração do app, selecione `app.py` como arquivo principal.
+5. Reinicie o app e limpe o cache após substituir a versão anterior.
+
+## Atenção
+
+A versão anterior estava incompleta porque o `app.py` dependia de módulos que não estavam presentes no pacote final. Esta versão inclui todos os módulos importados.

@@ -1,0 +1,13 @@
+from src.data import generate_demo_data
+from src.engine import run_scenario
+
+data=generate_demo_data()
+for scenario in ["Cenário Base","Peak Season","Otimista","Conservador"]:
+    result=run_scenario(data,scenario,"Proporcional",0,82)
+    d=result["demand"]
+    assert (d["demanda_final"]>=0).all()
+    daily=d.groupby(["data","filial"],as_index=False).agg(final=("demanda_final","sum"),piso=("piso_caixas","first"))
+    assert (daily["final"]+1e-6>=daily["piso"]).all()
+    assert (result["people"]["fte_necessario"]>=0).all()
+    assert (result["vehicles"]["capacidade_unitaria"]>0).all()
+print("Validação do motor concluída.")
